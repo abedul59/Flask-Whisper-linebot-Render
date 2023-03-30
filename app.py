@@ -73,8 +73,8 @@ def callback():
         abort(400)
     return 'OK'
 
-@handler.add(MessageEvent, message=AudioMessage)
-def handle_AudioMessage(event):
+@handler.add(MessageEvent, message=TextMessage)
+def handle_TextMessage(event):
     # Get user's message
     #user_message = event.message.text
     try:
@@ -89,7 +89,7 @@ def handle_AudioMessage(event):
             audio_content = line_bot_api.get_message_content(event.message.id)
             path = "./temp.mp3"
             print("路徑為temp.mp3")
-            
+
             with open(path, "wb") as fd:
                 for chunk in audio_content.iter_content():
                     fd.write(chunk)
