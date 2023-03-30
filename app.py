@@ -78,10 +78,18 @@ def handle_AudioMessage(event):
     # Get user's message
     #user_message = event.message.text
     try:
-        if (event.message.type == "audio"):
+        if (event.message.type == "text"):
+             line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text= event.message.text)
+            )           
+        
+        
+        elif (event.message.type == "audio"):
             audio_content = line_bot_api.get_message_content(event.message.id)
             path = "./temp.mp3"
             print("路徑為temp.mp3")
+            
             with open(path, "wb") as fd:
                 for chunk in audio_content.iter_content():
                     fd.write(chunk)
